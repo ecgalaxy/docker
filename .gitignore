@@ -1,0 +1,7 @@
+__pycache__
+.cache/
+.vscode
+core*
+.swp
+secrets.yml
+.github/

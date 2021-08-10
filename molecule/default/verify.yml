@@ -1,0 +1,7 @@
+- name: Verify
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: "Include Testing roles."
+      include_role:
+        name: "tests"
