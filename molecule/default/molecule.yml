@@ -4,64 +4,11 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: amazonlinux
-    image: geerlingguy/docker-amazonlinux2-ansible:latest
-    privileged: True
-    pre_build_image: false
-    command: /usr/lib/systemd/systemd
-    tmpfs:
-      - /run
-      - /tmp
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    env:
-      http_proxy: "${http_proxy}"
-      https_proxy: "${https_proxy}"
-      no_proxy: "${no_proxy}"
-  - name: centos7
-    image: geerlingguy/docker-centos7-ansible:latest
-    privileged: True
-    pre_build_image: true
-    command: /usr/sbin/init
-    tmpfs:
-      - /run
-      - /tmp
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    env:
-      http_proxy: "${http_proxy}"
-      https_proxy: "${https_proxy}"
-      no_proxy: "${no_proxy}"
   - name: centos8
     image: geerlingguy/docker-centos8-ansible:latest
     command: /usr/sbin/init
     privileged: True
     pre_build_image: true
-    tmpfs:
-      - /run
-      - /tmp
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    env:
-      http_proxy: "${http_proxy}"
-      https_proxy: "${https_proxy}"
-      no_proxy: "${no_proxy}"
-  - name: ubuntu1804
-    image: geerlingguy/docker-ubuntu1804-ansible:latest
-    command: /bin/systemd
-    privileged: True
-    pre_build_image: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    env:
-      http_proxy: "${http_proxy}"
-      https_proxy: "${https_proxy}"
-      no_proxy: "${no_proxy}"
-  - name: ubuntu2004
-    image: geerlingguy/docker-ubuntu2004-ansible:latest
-    command: /bin/systemd
-    pre_build_image: true
-    privileged: True
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     env:
