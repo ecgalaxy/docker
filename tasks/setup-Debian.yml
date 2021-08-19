@@ -5,6 +5,7 @@
       - docker
       - docker-engine
     state: absent
+  become: true
 
 - name: Ensure dependencies are installed
   package:
@@ -13,6 +14,7 @@
       - ca-certificates
       - gnupg2
     state: present
+  become: true
 
 - name: Import key (APT)
   apt_key:
@@ -20,6 +22,7 @@
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     state: present
   register: add_repository_key
+  become: true
 
 - name: Enable Docker repository (APT)
   apt_repository:
@@ -27,3 +30,4 @@
     filename: docker
     state: present
     update_cache: true
+  become: true

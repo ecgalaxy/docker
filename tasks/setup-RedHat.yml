@@ -6,11 +6,13 @@
       - docker-common
       - docker-engine
     state: absent
+  become: true
 
 - name: Import key (Yum)
   rpm_key:
     key: "{{ docker_yum_gpg_key }}"
     state: present
+  become: true
 
 - name: Add Docker repository
   get_url:
@@ -19,6 +21,7 @@
     owner: root
     group: root
     mode: 0644
+  become: true
 
 - name: Configure containerd on RHEL 8
   block:
@@ -31,4 +34,5 @@
       package:
         name: containerd.io
         state: present
+  become: true
   when: ansible_distribution_major_version | int == 8
