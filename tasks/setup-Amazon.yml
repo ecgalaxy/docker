@@ -1,5 +1,4 @@
 ---
-
 - name: Enable docker from amazon-linux-extras
   command: amazon-linux-extras enable docker
   register: result

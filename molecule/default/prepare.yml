@@ -6,10 +6,13 @@
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
       changed_when: false
+
     - name: Create /etc/docker folder
       file:
         state: directory
         path: /etc/docker
+        mode: 0755
+
     - name: Set storage-driver to vfs
       copy:
         content: |
@@ -17,6 +20,7 @@
             "storage-driver": "vfs"
           }
         dest: /etc/docker/daemon.json
+        mode: 0644
   environment:
     http_proxy: "{{ lookup('env', 'http_proxy') }}"
     https_proxy: "{{ lookup('env', 'https_proxy') }}"

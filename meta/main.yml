@@ -1,8 +1,7 @@
 ---
-
 galaxy_info:
   author: ecgalaxy
-  description: Install Docker.
+  description: Docker
   company: European Commission
   platforms:
   - name: Amazon Linux 2

@@ -1,7 +1,17 @@
+---
 - name: Verify
   hosts: all
-  gather_facts: yes
+  gather_facts: false
   tasks:
-    - name: "Include Testing roles."
-      include_role:
-        name: "tests"
+    - name: Stat docker installation
+      stat:
+        path: "/usr/bin/docker"
+      register: directory
+
+    - name: Assert docker installation
+      assert:
+        that:
+          - "directory.stat.exists"
+          - "directory.stat.mode == '0755'"
+          - "directory.stat.pw_name == 'root'"
+          - "directory.stat.gr_name == 'root'"

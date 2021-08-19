@@ -1,9 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-  roles:
-    - role: docker
+  tasks:
+    - name: "Include docker"
+      include_role:
+        name: "docker"
   environment:
     http_proxy: "{{ lookup('env', 'http_proxy') }}"
     https_proxy: "{{ lookup('env', 'https_proxy') }}"
