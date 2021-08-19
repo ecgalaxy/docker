@@ -1,0 +1,34 @@
+---
+- name: Include Distribution-specific variables (Amazon Linux)
+  include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Amazon'
+
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat' and ansible_distribution != 'Amazon'
+
+- include_tasks: setup-Amazon.yml
+  when: ansible_os_family == 'RedHat' and ansible_distribution == 'Amazon'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Install docker
+  package:
+    name: "{{ docker_package }}"
+    state: present
+  become: true
+
+- name: Ensure docker service is started and enabled at boot
+  service:
+    name: docker
+    state: "{{ docker_service_state }}"
+    enabled: "{{ docker_service_enabled }}"
+  become: true
+
+- name: Ensure docker users are added to the docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+  with_items: "{{ docker_users }}"
+  become: true

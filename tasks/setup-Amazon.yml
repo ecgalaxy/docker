@@ -1,0 +1,7 @@
+---
+- name: Enable docker from amazon-linux-extras
+  command: amazon-linux-extras enable docker
+  register: result
+  failed_when: result.rc != 0
+  become: true
+  changed_when: false
