@@ -1,20 +1,23 @@
 ---
 galaxy_info:
+  name: docker
   author: ecgalaxy
-  description: Docker
+  description: Installs Docker
   company: European Commission
-  platforms:
-  - name: Amazon Linux 2
-    versions:
-      - all
-  - name: EL
-    versions:
-      - 7
-  - name: Ubuntu
-    versions:
-      - bionic
-      - focal
   license: EUPL-1.2
-  min_ansible_version: 2.1
-  galaxy_tags: []
+  min_ansible_version: 2.5
+  platforms:
+    - name: Amazon Linux 2
+      versions:
+        - all
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+  galaxy_tags:
+    - system
 dependencies: []

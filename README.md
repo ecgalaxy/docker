@@ -2,7 +2,8 @@ ECGALAXY docker role
 ====================
 
 This Ansible role installs Docker.
-It is based on geerlingguy/ansible-role-docker and supports Amazon Linux 2.
+
+It is based on [ansible-role-docker](https://github.com/geerlingguy/ansible-role-docker) and supports Amazon Linux 2.
 
 Requirements
 ------------
@@ -24,15 +25,25 @@ Example Playbook
 
     - hosts: all
       roles:
-        - docker
+        - ecgalaxy.docker
 
 License
 -------
 
-EUPL-1.2
+Copyright the European Union 2022.
+
+Licensed under the EUPL-1.2 or later.
+
+Original work
+-------------
+
+Copyright Jeff Geerling.
+
+See https://github.com/geerlingguy/ansible-role-docker
 
 Author Information
 ------------------
 
 Original work: Jeff Geerling and contributors.
+
 Modified work: ECGALAXY team.
