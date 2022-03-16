@@ -4,12 +4,12 @@
   gather_facts: false
   tasks:
     - name: Stat docker installation
-      stat:
+      ansible.builtin.stat:
         path: "/usr/bin/docker"
       register: directory
 
     - name: Assert docker installation
-      assert:
+      ansible.builtin.assert:
         that:
           - "directory.stat.exists"
           - "directory.stat.mode == '0755'"

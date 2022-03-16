@@ -1,19 +1,23 @@
 ---
 - name: Include Distribution-specific variables (Amazon Linux)
-  include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   when: ansible_distribution == 'Amazon'
 
-- include_tasks: setup-RedHat.yml
+- name: Include RedHat tasks
+  ansible.builtin.include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat' and ansible_distribution != 'Amazon'
 
-- include_tasks: setup-Amazon.yml
+- name: Include Amazon Linux tasks
+  ansible.builtin.include_tasks: setup-Amazon.yml
   when: ansible_os_family == 'RedHat' and ansible_distribution == 'Amazon'
 
-- include_tasks: setup-Debian.yml
+- name: Include Debian tasks
+  ansible.builtin.include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: install.yml
+- name: Include install tasks
+  ansible.builtin.include_tasks: install.yml
   when: >
-    ansible_os_family == 'Debian' 
-    or ( ansible_os_family == 'RedHat' and ansible_distribution == 'Amazon' ) 
+    ansible_os_family == 'Debian'
+    or ( ansible_os_family == 'RedHat' and ansible_distribution == 'Amazon' )
     or ( ansible_os_family == 'RedHat' and ansible_distribution != 'Amazon' and ansible_distribution_major_version | int == 7 )
