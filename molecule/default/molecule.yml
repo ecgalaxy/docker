@@ -4,8 +4,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: amazonlinux2
-    image: geerlingguy/docker-amazonlinux2-ansible:latest
+  - name: amazonlinux2-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/amazonlinux2-ansible:latest
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -15,8 +15,8 @@ platforms:
       http_proxy: "${http_proxy}"
       https_proxy: "${https_proxy}"
       no_proxy: "${no_proxy}"
-  - name: centos7
-    image: geerlingguy/docker-centos7-ansible:latest
+  - name: centos7-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/centos7-ansible:latest
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -26,8 +26,8 @@ platforms:
       http_proxy: "${http_proxy}"
       https_proxy: "${https_proxy}"
       no_proxy: "${no_proxy}"
-  - name: ubuntu1804
-    image: geerlingguy/docker-ubuntu1804-ansible:latest
+  - name: rockylinux8-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/rockylinux8-ansible:latest
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -37,8 +37,30 @@ platforms:
       http_proxy: "${http_proxy}"
       https_proxy: "${https_proxy}"
       no_proxy: "${no_proxy}"
-  - name: ubuntu2004
-    image: geerlingguy/docker-ubuntu2004-ansible:latest
+  - name: ubuntu1804-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/ubuntu1804-ansible:latest
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    env:
+      http_proxy: "${http_proxy}"
+      https_proxy: "${https_proxy}"
+      no_proxy: "${no_proxy}"
+  - name: ubuntu2004-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/ubuntu2004-ansible:latest
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    env:
+      http_proxy: "${http_proxy}"
+      https_proxy: "${https_proxy}"
+      no_proxy: "${no_proxy}"
+  - name: ubuntu2204-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/ubuntu2204-ansible:latest
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -50,10 +72,10 @@ platforms:
       no_proxy: "${no_proxy}"
 provisioner:
   name: ansible
-  log: true
-  config_options:
-    defaults:
-      callback_whitelist: profile_tasks, timer, yaml
+  inventory:
+    group_vars:
+      all:
+        ansible_user: ansible
 verifier:
   name: ansible
 lint: |

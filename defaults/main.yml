@@ -12,7 +12,7 @@ docker_apt_repository: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
 
 # Used only for RedHat/CentOS.
-docker_yum_repo_base_url: "{{ docker_repo_url }}/{{ (ansible_distribution == 'CentOS') | ternary('centos','rhel') }}"
+docker_yum_repo_base_url: "{{ docker_repo_url }}/centos"
 docker_yum_repo_url: "{{ docker_yum_repo_base_url }}/{{ docker_package }}.repo"
 docker_yum_gpg_key: "{{ docker_yum_repo_base_url }}/gpg"
 
