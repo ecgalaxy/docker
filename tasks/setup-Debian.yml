@@ -17,11 +17,18 @@
   become: true
 
 - name: Import key (APT)
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ docker_apt_gpg_key }}"
-    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    state: present
-  register: add_repository_key
+    dest: "{{ docker_apt_keyring }}"
+    mode: '0644'
+    force: true
+  become: true
+
+- name: Disable Docker repository not using keyring (APT)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+    filename: docker
+    state: absent
   become: true
 
 - name: Enable Docker repository (APT)
