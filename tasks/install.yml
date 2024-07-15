@@ -6,11 +6,18 @@
   become: true
 
 - name: Ensure docker service is started and enabled at boot
-  ansible.builtin.service:
-    name: docker
-    state: "{{ docker_service_state }}"
-    enabled: "{{ docker_service_enabled }}"
-  become: true
+  block:
+    - name: Ensure docker service is started and enabled at boot
+      ansible.builtin.service:
+        name: docker
+        state: "{{ docker_service_state }}"
+        enabled: "{{ docker_service_enabled }}"
+      become: true
+
+  rescue:
+    - name: Print error message
+      ansible.builtin.debug:
+        msg: 'There was an error enabling the Docker service'
 
 - name: Ensure docker users are added to the docker group
   ansible.builtin.user:

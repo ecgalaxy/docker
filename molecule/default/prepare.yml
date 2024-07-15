@@ -11,7 +11,7 @@
       ansible.builtin.file:
         state: directory
         path: /etc/docker
-        mode: 0755
+        mode: 'u=rwx,go=rx'
 
     - name: Set storage-driver to vfs
       ansible.builtin.copy:
@@ -20,7 +20,7 @@
             "storage-driver": "vfs"
           }
         dest: /etc/docker/daemon.json
-        mode: 0644
+        mode: 'u=rw,go=r'
   environment:
     http_proxy: "{{ lookup('env', 'http_proxy') }}"
     https_proxy: "{{ lookup('env', 'https_proxy') }}"

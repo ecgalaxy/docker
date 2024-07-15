@@ -20,5 +20,5 @@
     dest: '/etc/yum.repos.d/{{ docker_package }}.repo'
     owner: root
     group: root
-    mode: 0644
+    mode: 'u=rw,go=r'
   become: true

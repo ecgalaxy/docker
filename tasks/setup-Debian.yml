@@ -20,13 +20,13 @@
   ansible.builtin.get_url:
     url: "{{ docker_apt_gpg_key }}"
     dest: "{{ docker_apt_keyring }}"
-    mode: '0644'
+    mode: 'u=rw,go=r'
     force: true
   become: true
 
 - name: Disable Docker repository not using keyring (APT)
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+    repo: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}" # noqa yaml[line-length]
     filename: docker
     state: absent
   become: true

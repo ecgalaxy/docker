@@ -10,7 +10,7 @@ docker_apt_release_channel: stable
 docker_apt_arch: amd64
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
 docker_apt_keyring: "/usr/share/keyrings/docker-archive-keyring.asc"
-docker_apt_repository: "deb [arch={{ docker_apt_arch }} signed-by={{ docker_apt_keyring }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+docker_apt_repository: "deb [arch={{ docker_apt_arch }} signed-by={{ docker_apt_keyring }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}" # noqa yaml[line-length]
 
 # Used only for RedHat/CentOS.
 docker_yum_repo_base_url: "{{ docker_repo_url }}/centos"
