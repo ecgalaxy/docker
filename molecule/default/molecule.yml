@@ -14,6 +14,16 @@ platforms:
       http_proxy: "${http_proxy}"
       https_proxy: "${https_proxy}"
       no_proxy: "${no_proxy}"
+  - name: amazonlinux2023-${CI_JOB_ID:-0}
+    image: code.europa.eu:4567/ecgalaxy/amazonlinux2023-ansible:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    privileged: true
+    pre_build_image: true
+    environment:
+      http_proxy: "${http_proxy}"
+      https_proxy: "${https_proxy}"
+      no_proxy: "${no_proxy}"
   - name: rockylinux8-${CI_JOB_ID:-0}
     image: code.europa.eu:4567/ecgalaxy/rockylinux8-ansible:latest
     command: /usr/sbin/init

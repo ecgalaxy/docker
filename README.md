@@ -62,4 +62,4 @@ Author Information
 
 Original work: Jeff Geerling and contributors.
 
-Modified work: ECGALAXY team.
+Modified work: [ECGALAXY](https://code.europa.eu/groups/ecgalaxy/-/wikis/home) team.
